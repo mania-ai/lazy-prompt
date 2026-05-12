@@ -567,6 +567,12 @@
           table: "Spreadsheet / data analysis",
           research: "Research / fact-finding",
           writing: "Writing / marketing",
+          design: "Website / UI design",
+          presentation: "Presentation / slides",
+          strategy: "Strategy / plan",
+          learning: "Learning / explanation",
+          product: "Product / business",
+          creative: "Creative ideas",
           coding: "Code / review",
           summary: "Document summary",
           agentic: "Agentic task"
@@ -579,6 +585,12 @@
         examples: {
           table: "analyze this spreadsheet",
           writing: "Write a social media post",
+          design: "design a website",
+          presentation: "make a pitch deck",
+          strategy: "create an action plan",
+          learning: "explain this simply",
+          product: "improve the product offer",
+          creative: "come up with ideas",
           coding: "review code for bugs",
           research: "research the market",
           summary: "Create a document summary"
@@ -626,6 +638,12 @@
           table: "Анализ таблицы / данных",
           research: "Исследование / поиск",
           writing: "Текст / маркетинг",
+          design: "Дизайн сайта / интерфейс",
+          presentation: "Презентация / слайды",
+          strategy: "Стратегия / план",
+          learning: "Обучение / объяснение",
+          product: "Продукт / бизнес",
+          creative: "Идеи / креатив",
           coding: "Код / ревью",
           summary: "Выжимка из документа",
           agentic: "Агентская задача"
@@ -638,6 +656,12 @@
         examples: {
           table: "проанализируй таблицу",
           writing: "Напиши пост для Telegram",
+          design: "сделай дизайн сайта",
+          presentation: "собери презентацию",
+          strategy: "составь план действий",
+          learning: "объясни простыми словами",
+          product: "улучши оффер продукта",
+          creative: "придумай идеи",
           coding: "проверь код на ошибки",
           research: "исследуй рынок",
           summary: "сделай выжимку из документа"
@@ -650,6 +674,12 @@
         table: "spreadsheet or data analysis",
         research: "research with source verification",
         writing: "writing task",
+        design: "website, landing page, or UI design",
+        presentation: "presentation or slide deck",
+        strategy: "strategy, roadmap, or action plan",
+        learning: "explanation, tutorial, or learning task",
+        product: "product, offer, or business task",
+        creative: "creative ideation task",
         coding: "code work",
         summary: "long-document brief",
         agentic: "multi-step agentic task"
@@ -658,6 +688,12 @@
         table: "анализ таблицы или набора данных",
         research: "исследование с проверкой источников",
         writing: "создание текста",
+        design: "дизайн сайта, лендинга или интерфейса",
+        presentation: "презентация или набор слайдов",
+        strategy: "стратегия, roadmap или план действий",
+        learning: "объяснение, обучение или разбор темы",
+        product: "продуктовая, офферная или бизнес-задача",
+        creative: "креативная задача на идеи",
         coding: "работа с кодом",
         summary: "выжимка из длинного документа",
         agentic: "многошаговая агентская задача"
@@ -730,6 +766,78 @@
             "Suggest 2–3 headline options when useful."
           ],
           output: "Provide the finished text, then briefly explain the key editorial choices and suggest improvement options."
+        },
+        design: {
+          role: "You are a senior UX/UI designer and creative web art director.",
+          goal: "Turn the request into a concrete website or interface design brief with structure, visual direction, and implementation-ready details.",
+          steps: [
+            "Clarify the site goal, target audience, main user action, business context, and required pages or sections.",
+            "Propose a clear visual direction: mood, layout logic, color system, typography, spacing, imagery, and interaction style.",
+            "Describe the key blocks, hierarchy, navigation, responsive behavior, and states for important elements.",
+            "Avoid generic AI-looking design. Make choices that fit the product, audience, and context.",
+            "If information is missing, make reasonable assumptions and label them clearly."
+          ],
+          output: "Use this structure: design concept, audience and goal, page structure, visual system, UX details, content blocks, implementation notes, clarification questions."
+        },
+        presentation: {
+          role: "You are a presentation strategist and slide narrative designer.",
+          goal: "Turn the request into a clear presentation plan with a persuasive storyline and slide-by-slide structure.",
+          steps: [
+            "Clarify the presentation goal, audience, situation, desired action, and time limit.",
+            "Build a logical narrative arc: problem, insight, solution, proof, and next step.",
+            "Suggest slide titles, key messages, supporting visuals, and speaker notes when useful.",
+            "Keep each slide focused on one idea and avoid overloaded text.",
+            "If data is missing, mark assumptions and list what should be added."
+          ],
+          output: "Use this structure: presentation goal, audience, storyline, slide-by-slide outline, visual direction, speaker notes, missing inputs."
+        },
+        strategy: {
+          role: "You are a strategy consultant who turns vague goals into practical plans.",
+          goal: "Create a realistic strategy, roadmap, or action plan with priorities and trade-offs.",
+          steps: [
+            "Clarify the objective, current state, constraints, resources, deadline, and success metrics.",
+            "Break the work into phases and prioritize what should happen first.",
+            "Identify risks, dependencies, assumptions, and decisions that need to be made.",
+            "Avoid vague advice. Make the plan concrete enough to execute.",
+            "Separate quick wins from longer-term initiatives."
+          ],
+          output: "Use this structure: goal, assumptions, strategy, action plan, priorities, risks, success metrics, next steps."
+        },
+        learning: {
+          role: "You are a clear teacher who explains complex ideas simply without dumbing them down.",
+          goal: "Explain the topic in a way that matches the user’s level and helps them actually understand it.",
+          steps: [
+            "Identify the learner’s likely level from the request and adapt the explanation accordingly.",
+            "Start with the core idea, then add details, examples, analogies, and common mistakes.",
+            "Use plain language, but preserve important nuance.",
+            "Check understanding with a short recap or practice question when useful.",
+            "If the topic is ambiguous, state assumptions and ask targeted follow-up questions."
+          ],
+          output: "Use this structure: simple explanation, deeper explanation, example, common mistakes, recap, practice task or next step."
+        },
+        product: {
+          role: "You are a product strategist and business analyst.",
+          goal: "Improve or analyze the product, feature, offer, positioning, or business idea.",
+          steps: [
+            "Clarify the target user, pain point, value proposition, use case, and business goal.",
+            "Analyze the offer or product through user value, differentiation, feasibility, and risks.",
+            "Suggest concrete improvements, experiments, and prioritization logic.",
+            "Do not invent market facts. Label assumptions and list what should be validated.",
+            "Translate insights into practical next steps."
+          ],
+          output: "Use this structure: diagnosis, target user, value proposition, opportunities, risks, experiments, prioritized next steps."
+        },
+        creative: {
+          role: "You are a creative director and ideation partner.",
+          goal: "Generate strong, varied ideas that fit the task, audience, and constraints.",
+          steps: [
+            "Clarify the creative objective, audience, context, tone, and boundaries.",
+            "Produce several distinct directions instead of variations of the same idea.",
+            "Briefly explain the logic behind the strongest options.",
+            "Avoid clichés and generic phrases unless the user specifically asks for them.",
+            "Group ideas by direction, use case, or level of boldness."
+          ],
+          output: "Use this structure: creative directions, idea list, strongest options, rationale, refinement suggestions."
         },
         coding: {
           role: "You are a senior engineer and code reviewer.",
@@ -804,6 +912,78 @@
             "Предложи 2–3 варианта заголовка, если это уместно."
           ],
           output: "Дай готовый текст, затем коротко объясни ключевые редакторские решения и предложи варианты улучшения."
+        },
+        design: {
+          role: "Ты — сильный UX/UI-дизайнер и креативный веб-арт-директор.",
+          goal: "Преврати запрос в конкретный бриф на дизайн сайта или интерфейса: со структурой, визуальным направлением и деталями для реализации.",
+          steps: [
+            "Уточни цель сайта, аудиторию, главное действие пользователя, бизнес-контекст и нужные страницы или блоки.",
+            "Предложи визуальное направление: настроение, логику макета, цветовую систему, типографику, отступы, изображения и стиль взаимодействий.",
+            "Опиши ключевые блоки, иерархию, навигацию, адаптивность и состояния важных элементов.",
+            "Избегай шаблонного AI-дизайна. Делай решения, которые подходят продукту, аудитории и контексту.",
+            "Если данных не хватает, сделай разумные предположения и явно их пометь."
+          ],
+          output: "Дай ответ в структуре: дизайн-концепция, аудитория и цель, структура страницы, визуальная система, UX-детали, контентные блоки, заметки для реализации, вопросы для уточнения."
+        },
+        presentation: {
+          role: "Ты — стратег презентаций и дизайнер повествования для слайдов.",
+          goal: "Преврати запрос в понятную структуру презентации с убедительной логикой и планом по слайдам.",
+          steps: [
+            "Уточни цель презентации, аудиторию, ситуацию, желаемое действие и ограничение по времени.",
+            "Построй логичную историю: проблема, инсайт, решение, доказательства и следующий шаг.",
+            "Предложи заголовки слайдов, ключевые сообщения, визуальные идеи и заметки спикера, если это полезно.",
+            "Держи каждый слайд вокруг одной мысли и избегай перегруза текстом.",
+            "Если данных не хватает, пометь предположения и перечисли, что нужно добавить."
+          ],
+          output: "Дай ответ в структуре: цель презентации, аудитория, сюжетная линия, план по слайдам, визуальное направление, заметки спикера, недостающие данные."
+        },
+        strategy: {
+          role: "Ты — стратегический консультант, который превращает расплывчатые цели в практичные планы.",
+          goal: "Создай реалистичную стратегию, roadmap или план действий с приоритетами и компромиссами.",
+          steps: [
+            "Уточни цель, текущую ситуацию, ограничения, ресурсы, срок и метрики успеха.",
+            "Разбей работу на этапы и расставь приоритеты: что делать сначала.",
+            "Определи риски, зависимости, предположения и решения, которые нужно принять.",
+            "Избегай абстрактных советов. Сделай план достаточно конкретным для выполнения.",
+            "Отдели быстрые победы от долгосрочных инициатив."
+          ],
+          output: "Дай ответ в структуре: цель, предположения, стратегия, план действий, приоритеты, риски, метрики успеха, следующие шаги."
+        },
+        learning: {
+          role: "Ты — понятный преподаватель, который объясняет сложное просто, но без примитивизации.",
+          goal: "Объясни тему на уровне пользователя так, чтобы он действительно понял суть.",
+          steps: [
+            "Определи вероятный уровень пользователя по запросу и адаптируй объяснение.",
+            "Начни с главной идеи, затем добавь детали, примеры, аналогии и типичные ошибки.",
+            "Пиши простым языком, но сохраняй важные нюансы.",
+            "Если уместно, добавь короткое резюме или вопрос для самопроверки.",
+            "Если тема неоднозначна, обозначь предположения и задай точные вопросы."
+          ],
+          output: "Дай ответ в структуре: простое объяснение, более глубокое объяснение, пример, типичные ошибки, краткое резюме, задание или следующий шаг."
+        },
+        product: {
+          role: "Ты — продуктовый стратег и бизнес-аналитик.",
+          goal: "Улучши или проанализируй продукт, фичу, оффер, позиционирование или бизнес-идею.",
+          steps: [
+            "Уточни целевого пользователя, боль, ценностное предложение, сценарий использования и бизнес-цель.",
+            "Разбери продукт или оффер через пользу для пользователя, отличие от альтернатив, реализуемость и риски.",
+            "Предложи конкретные улучшения, эксперименты и логику приоритизации.",
+            "Не выдумывай рыночные факты. Помечай предположения и перечисляй, что нужно проверить.",
+            "Переводи выводы в практичные следующие шаги."
+          ],
+          output: "Дай ответ в структуре: диагноз, целевой пользователь, ценностное предложение, возможности, риски, эксперименты, приоритетные следующие шаги."
+        },
+        creative: {
+          role: "Ты — креативный директор и партнер по генерации идей.",
+          goal: "Сгенерируй сильные и разнообразные идеи, которые подходят задаче, аудитории и ограничениям.",
+          steps: [
+            "Уточни креативную цель, аудиторию, контекст, тон и границы задачи.",
+            "Дай несколько разных направлений, а не вариации одной и той же идеи.",
+            "Коротко объясни логику самых сильных вариантов.",
+            "Избегай клише и общих фраз, если пользователь не просит обратного.",
+            "Сгруппируй идеи по направлению, сценарию применения или степени смелости."
+          ],
+          output: "Дай ответ в структуре: креативные направления, список идей, самые сильные варианты, логика выбора, как доработать."
         },
         coding: {
           role: "Ты — старший инженер и ревьюер кода.",
@@ -924,12 +1104,20 @@
     }
 
     function inferType(text) {
-      if (includesAny(text, ["table", "spreadsheet", "excel", "csv", "data", "metric", "revenue", "sales", "dashboard", "таблиц", "данн", "метрик", "выручк", "продаж", "дашборд"])) return "table";
-      if (includesAny(text, ["code", "function", "bug", "error", "api", "script", "python", "javascript", "react", "sql", "код", "функц", "ошибк", "баг", "скрипт"])) return "coding";
-      if (includesAny(text, ["research", "market", "competitor", "overview", "source", "trend", "find", "найди", "исслед", "рынок", "конкур", "обзор", "источник"])) return "research";
-      if (includesAny(text, ["post", "article", "text", "email", "landing", "copy", "social media", "telegram", "message", "пост", "стать", "текст", "письм", "лендинг", "сообщен"])) return "writing";
-      if (includesAny(text, ["summary", "summarize", "brief", "document", "digest", "notes", "суммар", "резюм", "выжим", "документ", "конспект"])) return "summary";
-      if (includesAny(text, ["agent", "automate", "multi-step", "сделай всё", "автомат", "агент", "многошаг"])) return "agentic";
+      const lower = text.toLowerCase();
+
+      if (includesAny(lower, ["code", "function", "bug", "error", "api", "script", "python", "javascript", "react", "sql", "код", "функц", "ошибк", "баг", "скрипт"])) return "coding";
+      if (includesAny(lower, ["table", "spreadsheet", "excel", "csv", "data", "metric", "revenue", "sales", "dashboard", "таблиц", "данн", "метрик", "выручк", "продаж", "дашборд"])) return "table";
+      if (includesAny(lower, ["website", "web page", "webpage", "web design", "ui", "ux", "interface", "landing page", "site design", "design a site", "design a website", "homepage", "дизайн", "сайт", "интерфейс", "лендинг", "главн", "страниц"])) return "design";
+      if (includesAny(lower, ["presentation", "slides", "slide deck", "pitch deck", "keynote", "powerpoint", "презентац", "слайд", "питч", "дек"])) return "presentation";
+      if (includesAny(lower, ["strategy", "roadmap", "action plan", "plan", "steps", "step-by-step", "стратег", "роадмап", "дорожн", "план", "пошаг", "шаги"])) return "strategy";
+      if (includesAny(lower, ["explain", "teach", "learn", "tutorial", "lesson", "simple terms", "объясн", "научи", "разбер", "урок", "простыми словами"])) return "learning";
+      if (includesAny(lower, ["product", "feature", "offer", "positioning", "value proposition", "hypothesis", "mvp", "pricing", "продукт", "фич", "оффер", "позиционир", "гипотез", "ценност", "тариф"])) return "product";
+      if (includesAny(lower, ["ideas", "brainstorm", "name", "naming", "slogan", "concepts", "creative", "придум", "идеи", "брейнсторм", "назван", "слоган", "креатив"])) return "creative";
+      if (includesAny(lower, ["research", "market", "competitor", "overview", "source", "trend", "find", "найди", "исслед", "рынок", "конкур", "обзор", "источник"])) return "research";
+      if (includesAny(lower, ["post", "article", "text", "email", "copy", "social media", "telegram", "message", "пост", "стать", "текст", "письм", "сообщен"])) return "writing";
+      if (includesAny(lower, ["summary", "summarize", "brief", "document", "digest", "notes", "суммар", "резюм", "выжим", "документ", "конспект"])) return "summary";
+      if (includesAny(lower, ["agent", "automate", "multi-step", "сделай всё", "автомат", "агент", "многошаг"])) return "agentic";
       return "agentic";
     }
 
