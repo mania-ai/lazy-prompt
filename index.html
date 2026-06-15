@@ -283,6 +283,22 @@
       border: 1px solid var(--button-border);
     }
 
+    .lang-switch { display: inline-flex; gap: 6px; }
+    .lang-opt {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--button-border);
+      padding: 9px 12px;
+      border-radius: 12px;
+      opacity: .6;
+    }
+    .lang-opt.active {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: var(--accent);
+      opacity: 1;
+    }
+
     .output {
       min-height: 560px;
       white-space: pre-wrap;
@@ -409,7 +425,11 @@
       <div class="topline">
         <a class="eyebrow" data-i18n="brand" href="https://t.me/ai_mania" target="_blank" rel="noopener">AI Mania</a>
         <div class="top-actions">
-          <button class="secondary" id="languageBtn" type="button">RU</button>
+          <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+            <button class="lang-opt" type="button" data-lang="en">EN</button>
+            <button class="lang-opt" type="button" data-lang="ru">RU</button>
+            <button class="lang-opt" type="button" data-lang="zh">中文</button>
+          </div>
           <button class="secondary" id="themeBtn" type="button">Light theme</button>
         </div>
       </div>
@@ -525,7 +545,7 @@
     const scoreHint = $("scoreHint");
     const toast = $("toast");
     const themeBtn = $("themeBtn");
-    const languageBtn = $("languageBtn");
+    const langButtons = document.querySelectorAll(".lang-opt");
 
     let currentLang = "en";
 
@@ -611,7 +631,7 @@
         lead: "Вставьте короткий запрос вроде «проанализируй таблицу». Инструмент добавит роль, задачу, контекст, критерии успеха, формат вывода, ограничения и самопроверку.",
         themeLight: "Светлая тема",
         themeDark: "Тёмная тема",
-        languageButton: "EN",
+        languageButton: "中文",
         inputTitle: "Входные данные",
         lazyPromptLabel: "Ленивый промпт",
         lazyPromptPlaceholder: "Например: Напиши пост для Telegram",
@@ -673,6 +693,78 @@
           research: "исследуй рынок",
           summary: "сделай выжимку из документа"
         }
+      },
+      zh: {
+        htmlLang: "zh",
+        title: "懒人提示词优化器",
+        brand: "AI Mania",
+        headlineBefore: "把随手一句话，变成",
+        headlineAccent: "能用的提示词",
+        lead: "粘贴一句简短的需求，比如「分析这个表格」。工具会自动补上角色、任务、背景、成功标准、输出格式、约束条件和自检环节。",
+        themeLight: "浅色主题",
+        themeDark: "深色主题",
+        languageButton: "EN",
+        inputTitle: "输入",
+        lazyPromptLabel: "懒人提示词",
+        lazyPromptPlaceholder: "例如：写一条社交媒体帖子",
+        taskTypeLabel: "任务类型",
+        verbosityLabel: "回答长度",
+        contextLabel: "背景与数据",
+        contextPlaceholder: "例如：帖子主题、要点、表格片段、文档、需求或评估标准。",
+        audienceLabel: "受众",
+        audiencePlaceholder: "例如：管理层、市场人员",
+        formatLabel: "期望格式",
+        formatPlaceholder: "例如：表格、计划、JSON 清单",
+        constraintsLabel: "约束条件",
+        constraintsPlaceholder: "例如：不要空话",
+        toneLabel: "语气",
+        tonePlaceholder: "例如：商务、亲和、专家",
+        generateBtn: "优化提示词",
+        resetBtn: "清空",
+        outputTitle: "优化后的提示词",
+        copyBtn: "复制",
+        scoreTitle: "提示词评分",
+        scoreHintInitial: "生成一条提示词，即可从结构、清晰度、背景、标准和自检几个维度查看评分。",
+        outputPlaceholder: "优化后的提示词会显示在这里。",
+        privacy: "本工具不会把你的数据发送到任何地方，所有内容都在你的浏览器本地生成。",
+        copyFirst: "请先生成提示词",
+        copied: "已复制",
+        selectedForCopy: "已选中，可手动复制",
+        defaultPrompt: "写一条社交媒体帖子",
+        taskOptions: {
+          auto: "自动识别",
+          table: "表格 / 数据分析",
+          research: "调研 / 事实核查",
+          writing: "文案 / 营销",
+          design: "网站 / 界面设计",
+          presentation: "演示 / 幻灯片",
+          strategy: "策略 / 计划",
+          learning: "学习 / 讲解",
+          product: "产品 / 商业",
+          creative: "创意点子",
+          coding: "代码 / 审查",
+          summary: "文档摘要",
+          contract: "合同审查",
+          agentic: "智能体任务"
+        },
+        verbosityOptions: {
+          balanced: "适中",
+          concise: "简洁",
+          detailed: "详细"
+        },
+        examples: {
+          table: "分析这个表格",
+          writing: "写一条社交媒体帖子",
+          design: "设计一个网站",
+          presentation: "做一份路演 PPT",
+          strategy: "制定一份行动计划",
+          learning: "用简单的话讲清楚",
+          product: "优化产品卖点",
+          creative: "想一些点子",
+          coding: "审查代码找出问题",
+          research: "调研一下市场",
+          summary: "给文档做个摘要"
+        }
       }
     };
 
@@ -706,6 +798,21 @@
         summary: "выжимка из длинного документа",
         contract: "разбор коммерческого договора (не юридическая консультация)",
         agentic: "многошаговая агентская задача"
+      },
+      zh: {
+        table: "表格或数据集分析",
+        research: "带来源核查的调研",
+        writing: "文案撰写任务",
+        design: "网站、落地页或界面设计",
+        presentation: "演示或幻灯片",
+        strategy: "策略、路线图或行动计划",
+        learning: "讲解、教学或知识梳理",
+        product: "产品、卖点或商业任务",
+        creative: "创意点子任务",
+        coding: "代码相关任务",
+        summary: "长文档摘要",
+        contract: "商业合同审查（非法律意见）",
+        agentic: "多步骤智能体任务"
       }
     };
 
@@ -735,6 +842,19 @@
         scoreHigh: "Промпт хорошо заполнен: есть структура, контекст, аудитория и важные ограничения.",
         scoreMid: "Основа хорошая, но стоит добавить больше конкретики: контекст, аудиторию, формат или ограничения.",
         scoreLow: "Это пока заготовка. Чтобы промпт стал сильнее, добавьте реальные данные, аудиторию, ограничения или тон."
+      },
+      zh: {
+        structure: "具备基本的提示词结构",
+        steps: "包含分步骤说明",
+        output: "包含输出格式和自检",
+        specific: "原始任务足够具体",
+        context: "补充了真实的背景或数据",
+        audience: "指定了受众",
+        constraints: "指定了约束条件",
+        tone: "指定了语气",
+        scoreHigh: "提示词填写得很完整：有结构、背景、受众和关键约束。",
+        scoreMid: "基础不错，但可以再补充一些细节：背景、受众、格式或约束。",
+        scoreLow: "目前还只是个草稿。补上真实数据、受众、约束或语气，会让它更有力。"
       }
     };
 
@@ -1056,6 +1176,165 @@
           ],
           output: "Дай ответ в структуре: план, выполнение, проверка, результат, открытые вопросы."
         }
+      },
+      zh: {
+        table: {
+          role: "你是一位严谨的数据分析师和商业分析师。",
+          goal: "分析所提供的表格或数据，并把它转化为可用于决策的有价值结论。",
+          steps: [
+            "先弄清数据结构：列、指标类型、周期、计量单位以及可能存在的缺失值。",
+            "检查数据质量：缺失值、重复、异常值、可疑数值和不一致的格式。",
+            "找出关键规律、趋势、异常，以及明显有别于其他部分的细分群体。",
+            "让每个结论都对应数据中的具体观察。",
+            "区分事实和假设。不要给出数据无法支撑的结论。"
+          ],
+          output: "请按以下结构作答：1) 摘要结论，2) 数据质量，3) 关键洞察，4) 解读风险，5) 建议采取的行动，6) 需要澄清的问题。"
+        },
+        research: {
+          role: "你是一位会跨多个来源核查事实的研究员和分析师。",
+          goal: "围绕该主题做调研，给出可核查、有结构的回答。",
+          steps: [
+            "把问题拆成子任务，并明确指出需要找到哪些数据。",
+            "在可能的情况下，重要事实至少用两个独立来源进行核查。",
+            "标注信息的日期和时效，尤其是当主题可能已经发生变化时。",
+            "区分已确认的事实、较可能的结论和推测。",
+            "最后列出还有哪些未知、以及接下来该核查什么。"
+          ],
+          output: "请按以下结构作答：摘要、详细分析、证据或来源依据、可信度、后续步骤。"
+        },
+        writing: {
+          role: "你是一位出色的编辑和沟通策略专家。",
+          goal: "写出一篇能解决用户任务、贴合受众且结构清晰的文案。",
+          steps: [
+            "先明确文案目标：告知、销售、说服、解释还是引发互动。",
+            "保持指定的语气，并根据受众调整用词。",
+            "做一个有力的开头、清晰的结构，以及具体的结尾号召或结论。",
+            "避免套话、陈词滥调和没有依据的承诺。",
+            "在合适时给出 2-3 个标题选项。"
+          ],
+          output: "先给出成稿，然后简要说明关键的编辑取舍，并提出可改进的方向。"
+        },
+        design: {
+          role: "你是一位资深的 UX/UI 设计师和富有创意的网页艺术总监。",
+          goal: "把需求转化为一份具体的网站或界面设计简报：包含结构、视觉方向和可落地实现的细节。",
+          steps: [
+            "明确网站目标、目标受众、用户的主要动作、商业背景，以及需要哪些页面或板块。",
+            "提出清晰的视觉方向：调性、布局逻辑、配色体系、字体、间距、图像和交互风格。",
+            "描述关键板块、层级、导航、响应式表现，以及重要元素的各种状态。",
+            "避免千篇一律的 AI 风设计。做出贴合产品、受众和场景的选择。",
+            "若信息不足，做出合理假设并明确标注。"
+          ],
+          output: "请按以下结构作答：设计概念、受众与目标、页面结构、视觉体系、UX 细节、内容板块、实现说明、需要澄清的问题。"
+        },
+        presentation: {
+          role: "你是一位演示策略专家和幻灯片叙事设计师。",
+          goal: "把需求转化为一份清晰的演示方案，配有有说服力的故事线和逐页结构。",
+          steps: [
+            "明确演示目标、受众、场合、希望对方采取的行动，以及时间限制。",
+            "搭建合乎逻辑的叙事弧线：问题、洞察、方案、佐证和下一步。",
+            "在有用时给出每页标题、核心信息、配图建议和演讲备注。",
+            "让每一页只围绕一个观点，避免文字堆砌。",
+            "若数据不足，标出假设并列出还需要补充什么。"
+          ],
+          output: "请按以下结构作答：演示目标、受众、故事线、逐页大纲、视觉方向、演讲备注、缺失的素材。"
+        },
+        strategy: {
+          role: "你是一位能把模糊目标转化为可执行方案的战略顾问。",
+          goal: "制定一份现实可行的策略、路线图或行动计划，明确优先级和取舍。",
+          steps: [
+            "明确目标、现状、约束、资源、期限和成功指标。",
+            "把工作拆成若干阶段，并排出先做什么的优先级。",
+            "找出风险、依赖关系、假设，以及需要做的决策。",
+            "避免空泛的建议。让计划具体到足以执行。",
+            "把速赢项和长期举措区分开。"
+          ],
+          output: "请按以下结构作答：目标、假设、策略、行动计划、优先级、风险、成功指标、后续步骤。"
+        },
+        learning: {
+          role: "你是一位讲解清晰的老师，能把复杂的概念讲简单，又不把它讲浅。",
+          goal: "按用户的水平讲解该主题，让对方真正理解其中的道理。",
+          steps: [
+            "根据需求判断学习者大致的水平，并据此调整讲解。",
+            "先讲核心思想，再补充细节、例子、类比和常见误区。",
+            "用通俗的语言，但保留重要的细微差别。",
+            "在合适时用简短的小结或练习题检验理解。",
+            "若主题含糊，说明假设并提出有针对性的追问。"
+          ],
+          output: "请按以下结构作答：简单讲解、深入讲解、例子、常见误区、小结、练习或下一步。"
+        },
+        product: {
+          role: "你是一位产品战略专家和商业分析师。",
+          goal: "改进或分析该产品、功能、卖点、定位或商业想法。",
+          steps: [
+            "明确目标用户、痛点、价值主张、使用场景和商业目标。",
+            "从用户价值、差异化、可行性和风险几个角度拆解卖点或产品。",
+            "提出具体的改进、实验和优先级排序的逻辑。",
+            "不要编造市场事实。标注假设，并列出需要验证的内容。",
+            "把洞察落到可执行的下一步。"
+          ],
+          output: "请按以下结构作答：诊断、目标用户、价值主张、机会、风险、实验、按优先级排序的下一步。"
+        },
+        creative: {
+          role: "你是一位创意总监，也是出点子的好搭档。",
+          goal: "生成有力且多样的点子，贴合任务、受众和约束。",
+          steps: [
+            "明确创意目标、受众、场景、语气和边界。",
+            "给出几个截然不同的方向，而不是同一个点子的变体。",
+            "简要说明最强几个方案背后的逻辑。",
+            "除非用户特意要求，否则避免陈词滥调和套话。",
+            "按方向、使用场景或大胆程度把点子分组。"
+          ],
+          output: "请按以下结构作答：创意方向、点子清单、最强方案、选择理由、打磨建议。"
+        },
+        coding: {
+          role: "你是一位资深工程师和代码审查者。",
+          goal: "可靠地完成代码任务，不靠猜测，也不做多余的复杂化。",
+          steps: [
+            "先弄清需求、输入、预期行为和约束。",
+            "如果是在审查代码，不要臆测没见过的文件的行为：只基于提供的代码工作，并明确指出缺失的上下文。",
+            "排查可能导致行为错误、崩溃、安全问题、测试失败或难以维护的问题。",
+            "不要只针对单个示例写死方案。给出适用于所有合法输入的通用方案。",
+            "若提出改动，给出最小补丁或完整的更新片段。"
+          ],
+          output: "请按以下结构作答：诊断、发现的问题、修复方案、为什么有效、测试场景。"
+        },
+        summary: {
+          role: "你是一位擅长从长文档中提炼要点的分析师。",
+          goal: "做一份简洁的文档摘要，保留重要的事实、决策、风险和待办事项。",
+          steps: [
+            "先挑出文档中最相关的片段和事实。",
+            "把主要观点与细节、举例和重复内容区分开。",
+            "在重要时保留数字、日期、人名、条件和约束。",
+            "不要添加文档中没有的信息。",
+            "最后指出文档没有回答哪些问题。"
+          ],
+          output: "请按以下结构作答：简要摘要、关键要点、重要细节、风险或不确定之处、后续步骤。"
+        },
+        contract: {
+          role: "你是一位经验丰富的商务采购审阅者，会站在交易一方的立场阅读供货、分销和服务合同。你不是律师，也不提供法律意见；你的任务是揭示商业风险、单方面条款和缺漏。",
+          goal: "站在用户所处的一方审查合同，找出有风险、不对等或缺失的条款。",
+          steps: [
+            "先确定审查是站在哪一方：供应商、采购方还是经销商。如果没有说明立场，不要猜测：要么询问，要么从双方立场分别分析并各自标注。",
+            "逐条过一遍商业核心：付款条件、违约金和逾期罚金、责任及其上限、解除与退出、退货 / 质保 / 质量索赔、价格调整、独家与最低采购量、自动续约、适用法律与管辖、保密。",
+            "从所选一方的角度，标出每一处单方面或不对等的义务，以及每一项隐性或或有成本。",
+            "列出缺失或提到却未附上的内容：附件、规格书、进度表、价目表、规章制度。",
+            "不要编造条款。凡是你标出的地方，都要引用准确的条款编号和原文措辞；如果文本里没有，就如实说明，不要凭记忆补全。",
+            "把「有商业风险」和「可能不合法」区分开。合法性你无法可靠判断，因此把这类地方单独标注为「需要律师」。"
+          ],
+          output: "请按以下结构作答：1) 一张按严重程度排序的风险表，列为：条款（编号 + 原文引用）| 对我方的风险 | 为什么是问题 | 需要澄清或修改什么；2) 缺失或未附上的内容；3) 自检：确认你引用的每一条都确实存在于文本中，并说明哪些部分你可能读得不够仔细。"
+        },
+        agentic: {
+          role: "你是一位复杂任务的自主执行者，会做计划、动手执行并校验结果。",
+          goal: "系统地完成多步骤任务，不丢失上下文，未经明确许可不做不可逆的操作。",
+          steps: [
+            "如果任务复杂，执行前先拟一个简短的计划。",
+            "迭代推进：先做出最小可用方案，再改进和校验。",
+            "当工具确实能提升结果质量、或核查事实需要时，再使用工具。",
+            "在有风险、不可逆或对外公开的操作前，先请求确认。",
+            "最后对照成功标准校验结果，并列出已完成的事项。"
+          ],
+          output: "请按以下结构作答：计划、执行、校验、结果、待解决的问题。"
+        }
       }
     };
 
@@ -1099,7 +1378,7 @@
     }
 
     function applyLanguage(lang) {
-      const previousDefaults = [ui.en.defaultPrompt, ui.ru.defaultPrompt];
+      const previousDefaults = [ui.en.defaultPrompt, ui.ru.defaultPrompt, ui.zh.defaultPrompt];
       currentLang = lang;
       const labels = ui[currentLang];
 
@@ -1122,7 +1401,7 @@
         node.dataset.example = labels.examples[key];
       });
 
-      languageBtn.textContent = labels.languageButton;
+      langButtons.forEach(b => b.classList.toggle("active", b.dataset.lang === currentLang));
       populateSelects();
       syncThemeButton();
 
@@ -1141,19 +1420,19 @@
     function inferType(text) {
       const lower = text.toLowerCase();
 
-      if (includesAny(lower, ["code", "function", "bug", "error", "api", "script", "python", "javascript", "react", "sql", "код", "функц", "ошибк", "баг", "скрипт"])) return "coding";
-      if (includesAny(lower, ["table", "spreadsheet", "excel", "csv", "data", "metric", "revenue", "sales", "dashboard", "таблиц", "данн", "метрик", "выручк", "продаж", "дашборд"])) return "table";
-      if (includesAny(lower, ["website", "web page", "webpage", "web design", "ui", "ux", "interface", "landing page", "site design", "design a site", "design a website", "homepage", "дизайн", "сайт", "интерфейс", "лендинг", "главн", "страниц"])) return "design";
-      if (includesAny(lower, ["presentation", "slides", "slide deck", "pitch deck", "keynote", "powerpoint", "презентац", "слайд", "питч", "дек"])) return "presentation";
-      if (includesAny(lower, ["strategy", "roadmap", "action plan", "plan", "steps", "step-by-step", "стратег", "роадмап", "дорожн", "план", "пошаг", "шаги"])) return "strategy";
-      if (includesAny(lower, ["explain", "teach", "learn", "tutorial", "lesson", "simple terms", "объясн", "научи", "разбер", "урок", "простыми словами"])) return "learning";
-      if (includesAny(lower, ["contract", "agreement", "non-disclosure", "nda", "договор", "контракт", "соглашен", "оферт"])) return "contract";
-      if (includesAny(lower, ["product", "feature", "offer", "positioning", "value proposition", "hypothesis", "mvp", "pricing", "продукт", "фич", "оффер", "позиционир", "гипотез", "ценност", "тариф"])) return "product";
-      if (includesAny(lower, ["ideas", "brainstorm", "name", "naming", "slogan", "concepts", "creative", "придум", "идеи", "брейнсторм", "назван", "слоган", "креатив"])) return "creative";
-      if (includesAny(lower, ["research", "market", "competitor", "overview", "source", "trend", "find", "найди", "исслед", "рынок", "конкур", "обзор", "источник"])) return "research";
-      if (includesAny(lower, ["post", "article", "text", "email", "copy", "social media", "telegram", "message", "пост", "стать", "текст", "письм", "сообщен"])) return "writing";
-      if (includesAny(lower, ["summary", "summarize", "brief", "document", "digest", "notes", "суммар", "резюм", "выжим", "документ", "конспект"])) return "summary";
-      if (includesAny(lower, ["agent", "automate", "multi-step", "сделай всё", "автомат", "агент", "многошаг"])) return "agentic";
+      if (includesAny(lower, ["code", "function", "bug", "error", "api", "script", "python", "javascript", "react", "sql", "код", "функц", "ошибк", "баг", "скрипт", "代码", "函数", "报错", "脚本", "调试", "程序"])) return "coding";
+      if (includesAny(lower, ["table", "spreadsheet", "excel", "csv", "data", "metric", "revenue", "sales", "dashboard", "таблиц", "данн", "метрик", "выручк", "продаж", "дашборд", "表格", "数据", "指标", "营收", "销售额", "报表", "看板"])) return "table";
+      if (includesAny(lower, ["website", "web page", "webpage", "web design", "ui", "ux", "interface", "landing page", "site design", "design a site", "design a website", "homepage", "дизайн", "сайт", "интерфейс", "лендинг", "главн", "страниц", "网站", "网页", "界面", "落地页", "主页", "设计一个"])) return "design";
+      if (includesAny(lower, ["presentation", "slides", "slide deck", "pitch deck", "keynote", "powerpoint", "презентац", "слайд", "питч", "дек", "演示", "幻灯片", "路演", "汇报", "ppt"])) return "presentation";
+      if (includesAny(lower, ["strategy", "roadmap", "action plan", "plan", "steps", "step-by-step", "стратег", "роадмап", "дорожн", "план", "пошаг", "шаги", "策略", "战略", "路线图", "行动计划", "方案", "分步"])) return "strategy";
+      if (includesAny(lower, ["explain", "teach", "learn", "tutorial", "lesson", "simple terms", "объясн", "научи", "разбер", "урок", "простыми словами", "解释", "讲解", "教程", "学习", "通俗", "讲清楚"])) return "learning";
+      if (includesAny(lower, ["contract", "agreement", "non-disclosure", "nda", "договор", "контракт", "соглашен", "оферт", "合同", "协议", "条款", "保密协议"])) return "contract";
+      if (includesAny(lower, ["product", "feature", "offer", "positioning", "value proposition", "hypothesis", "mvp", "pricing", "продукт", "фич", "оффер", "позиционир", "гипотез", "ценност", "тариф", "产品", "卖点", "定位", "价值主张", "定价", "功能点"])) return "product";
+      if (includesAny(lower, ["ideas", "brainstorm", "name", "naming", "slogan", "concepts", "creative", "придум", "идеи", "брейнсторм", "назван", "слоган", "креатив", "创意", "点子", "起名", "命名", "口号", "灵感"])) return "creative";
+      if (includesAny(lower, ["research", "market", "competitor", "overview", "source", "trend", "find", "найди", "исслед", "рынок", "конкур", "обзор", "источник", "研究", "调研", "市场", "竞品", "综述", "来源"])) return "research";
+      if (includesAny(lower, ["post", "article", "text", "email", "copy", "social media", "telegram", "message", "пост", "стать", "текст", "письм", "сообщен", "文案", "帖子", "文章", "邮件", "推文", "消息", "社交媒体"])) return "writing";
+      if (includesAny(lower, ["summary", "summarize", "brief", "document", "digest", "notes", "суммар", "резюм", "выжим", "документ", "конспект", "总结", "摘要", "概要", "文档", "梗概", "笔记"])) return "summary";
+      if (includesAny(lower, ["agent", "automate", "multi-step", "сделай всё", "автомат", "агент", "многошаг", "智能体", "自动化", "多步骤"])) return "agentic";
       return "agentic";
     }
 
@@ -1162,6 +1441,11 @@
         if (value === "concise") return "Пиши кратко и по делу. Убирай необязательный контекст и длинные вступления.";
         if (value === "detailed") return "Дай подробный, глубокий ответ с объяснением логики, примерами и нюансами, где это полезно.";
         return "Держи баланс: достаточно деталей для практической пользы, но без воды.";
+      }
+      if (currentLang === "zh") {
+        if (value === "concise") return "简洁直接地写，去掉非必要的背景和冗长的开场白。";
+        if (value === "detailed") return "给出详尽、深入的回答，在有帮助的地方说明思路、举例并点出细微差别。";
+        return "在实用和简洁之间取得平衡：细节足够落地，但不要空话。";
       }
       if (value === "concise") return "Write concisely and directly. Remove non-essential context and long introductions.";
       if (value === "detailed") return "Provide a detailed, thoughtful answer with reasoning, examples, and nuance where useful.";
@@ -1174,11 +1458,11 @@
       const selected = taskType.value === "auto" ? inferType(raw) : taskType.value;
       const tpl = templates[currentLang][selected];
       const taskLabel = typeLabels[currentLang][selected];
-      const aud = clean(audience.value, currentLang === "ru" ? "укажи подходящую аудиторию на основе задачи" : "infer the appropriate audience from the task");
+      const aud = clean(audience.value, currentLang === "ru" ? "укажи подходящую аудиторию на основе задачи" : currentLang === "zh" ? "根据任务推断合适的受众" : "infer the appropriate audience from the task");
       const outFormat = clean(format.value, tpl.output);
-      const ctx = clean(context.value, currentLang === "ru" ? "{{ВСТАВЬТЕ_СЮДА_ДАННЫЕ_ИЛИ_КОНТЕКСТ}}" : "{{PASTE_DATA_OR_CONTEXT_HERE}}");
-      const cons = clean(constraints.value, currentLang === "ru" ? "не заданы" : "not specified");
-      const toneValue = clean(tone.value, currentLang === "ru" ? "ясный, профессиональный, без канцелярита" : "clear, professional, no corporate jargon");
+      const ctx = clean(context.value, currentLang === "ru" ? "{{ВСТАВЬТЕ_СЮДА_ДАННЫЕ_ИЛИ_КОНТЕКСТ}}" : currentLang === "zh" ? "{{在此粘贴数据或背景}}" : "{{PASTE_DATA_OR_CONTEXT_HERE}}");
+      const cons = clean(constraints.value, currentLang === "ru" ? "не заданы" : currentLang === "zh" ? "未指定" : "not specified");
+      const toneValue = clean(tone.value, currentLang === "ru" ? "ясный, профессиональный, без канцелярита" : currentLang === "zh" ? "清晰、专业、不要官腔" : "clear, professional, no corporate jargon");
       const numberedSteps = tpl.steps.map(function(step, index) {
         return String(index + 1) + ". " + step;
       });
@@ -1200,6 +1484,25 @@
           "</instructions>", "",
           "<output_format>", outFormat, "</output_format>", "",
           "<quality_bar>", "Перед финальным ответом проверь себя:", "- Ответ напрямую решает исходную задачу.", "- Есть конкретика, а не общие слова.", "- Все выводы связаны с данными, контекстом или явно обозначенными предположениями.", "- Формат ответа соответствует <output_format>.", "- Нет неподтвержденных фактов, лишней воды и скрытых допущений.", "</quality_bar>"
+        );
+        return lines.join(NL);
+      }
+
+      if (currentLang === "zh") {
+        lines = [
+          "<role>", tpl.role, "</role>", "",
+          "<task>", "主要任务：" + raw, "目标：" + tpl.goal, "</task>", "",
+          "<context>", "背景、数据或材料：", ctx, "", "任务类型：" + taskLabel + "。", "结果受众：" + aud + "。", "回答语气：" + toneValue + "。", "</context>", "",
+          "<instructions>"
+        ];
+        numberedSteps.forEach(function(step) { lines.push(step); });
+        lines.push(
+          String(tpl.steps.length + 1) + ". " + verbosityInstruction(verbosity.value),
+          String(tpl.steps.length + 2) + ". 遵守以下约束：" + cons + "。",
+          String(tpl.steps.length + 3) + ". 如果数据不足，先做出尽可能合理的假设，并明确标注为假设，然后列出需要澄清的具体问题。",
+          "</instructions>", "",
+          "<output_format>", outFormat, "</output_format>", "",
+          "<quality_bar>", "在给出最终回答前，先自检：", "- 回答直接解决了原始任务。", "- 有具体内容，而不是空泛的话。", "- 所有结论都对应数据、背景或明确标注的假设。", "- 回答符合 <output_format>。", "- 没有未经证实的事实、空话或隐藏的假设。", "</quality_bar>"
         );
         return lines.join(NL);
       }
@@ -1298,8 +1601,8 @@
       syncThemeButton();
     });
 
-    languageBtn.addEventListener("click", () => {
-      applyLanguage(currentLang === "en" ? "ru" : "en");
+    langButtons.forEach(b => {
+      b.addEventListener("click", () => applyLanguage(b.dataset.lang));
     });
 
     document.querySelectorAll(".chip").forEach(chip => {
@@ -1348,8 +1651,10 @@
       }
     });
 
-    applyLanguage("en");
-    lazyPrompt.value = ui.en.defaultPrompt;
+    const navLang = (navigator.language || "en").toLowerCase();
+    const initialLang = navLang.indexOf("zh") === 0 ? "zh" : navLang.indexOf("ru") === 0 ? "ru" : "en";
+    applyLanguage(initialLang);
+    lazyPrompt.value = ui[initialLang].defaultPrompt;
     generate();
   });
   </script>
