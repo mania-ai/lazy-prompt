@@ -450,10 +450,14 @@
 
           <div class="chips" aria-label="Prompt examples">
             <span class="chip" data-example-key="table">analyze this spreadsheet</span>
-            <span class="chip" data-example-key="writing">Write a social media post</span>
+            <span class="chip" data-example-key="writing">write a social media post</span>
             <span class="chip" data-example-key="coding">review code for bugs</span>
             <span class="chip" data-example-key="research">research the market</span>
-            <span class="chip" data-example-key="summary">Create a document summary</span>
+            <span class="chip" data-example-key="summary">create a document summary</span>
+            <span class="chip" data-example-key="codebaseOverview" data-task-type="coding">give me an overview of this codebase</span>
+            <span class="chip" data-example-key="fixFailingTest" data-task-type="coding">a test is failing, find out why and fix it</span>
+            <span class="chip" data-example-key="writeTests" data-task-type="coding">write tests for this module and fix any failures</span>
+            <span class="chip" data-example-key="reviewChanges" data-task-type="coding">review my uncommitted changes before I commit</span>
           </div>
 
           <div class="grid-2">
@@ -610,7 +614,7 @@
         },
         examples: {
           table: "analyze this spreadsheet",
-          writing: "Write a social media post",
+          writing: "write a social media post",
           design: "design a website",
           presentation: "make a pitch deck",
           strategy: "create an action plan",
@@ -619,7 +623,11 @@
           creative: "come up with ideas",
           coding: "review code for bugs",
           research: "research the market",
-          summary: "Create a document summary"
+          summary: "create a document summary",
+          codebaseOverview: "give me an overview of this codebase: architecture, key directories, and how the pieces connect",
+          fixFailingTest: "the UserAuth test is failing, find out why and fix it",
+          writeTests: "write tests for the payment module, run them, and fix any failures",
+          reviewChanges: "review my uncommitted changes and flag anything that looks risky before I commit"
         }
       },
       ru: {
@@ -691,7 +699,11 @@
           creative: "придумай идеи",
           coding: "проверь код на ошибки",
           research: "исследуй рынок",
-          summary: "сделай выжимку из документа"
+          summary: "сделай выжимку из документа",
+          codebaseOverview: "сделай обзор этого проекта: архитектура, основные папки и как всё связано между собой",
+          fixFailingTest: "тест UserAuth падает, разберись почему и почини",
+          writeTests: "напиши тесты для платёжного модуля, запусти их и почини все ошибки",
+          reviewChanges: "проверь мои незакоммиченные изменения и отметь всё рискованное перед коммитом"
         }
       },
       zh: {
@@ -763,7 +775,11 @@
           creative: "想一些点子",
           coding: "审查代码找出问题",
           research: "调研一下市场",
-          summary: "给文档做个摘要"
+          summary: "给文档做个摘要",
+          codebaseOverview: "介绍一下这个项目：架构、主要目录，以及各部分是怎么连起来的",
+          fixFailingTest: "UserAuth 这个测试失败了，查一下原因并修好",
+          writeTests: "给支付模块写测试，跑一下，把失败的都修好",
+          reviewChanges: "检查一下我还没提交的改动，提交前把有风险的地方标出来"
         }
       }
     };
@@ -1608,6 +1624,7 @@
     document.querySelectorAll(".chip").forEach(chip => {
       chip.addEventListener("click", () => {
         lazyPrompt.value = chip.dataset.example;
+        if (chip.dataset.taskType) taskType.value = chip.dataset.taskType;
         generate();
       });
     });
